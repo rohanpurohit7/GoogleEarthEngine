@@ -1,0 +1,16 @@
+var parks = ee.FeatureCollection('ft:10KC6VfBWMUvNcuxU7mbSEg__F_4UVe9uDkCldBw');
+
+var addArea = function(feature) {
+  var area = feature.area();
+  var newFeature = feature.set({'myArea': area});
+  return newFeature;
+};
+
+var parksWithArea = parks.map(addArea);
+
+var bigParks = parksWithArea.filter(ee.Filter.gt('myArea', 50000));
+
+Map.setCenter(-122.45, 37.75, 13);
+Map.addLayer(parks, {}, 'Parks');
+Map.addLayer(bigParks, {color: 'FF0000'}, 'Big Parks');
+      

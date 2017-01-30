@@ -1,0 +1,10 @@
+var subway = ee.FeatureCollection('ft:1xCCZkVn8DIkB7i7RVkvsYWxAxsdsQZ6SbD9PCXw');
+
+var buffer = function(feature) {
+  return feature.buffer(500);
+};
+
+var bufferedSubway = subway.map(buffer);
+
+Map.setCenter(-122.45, 37.75, 13);
+Map.addLayer(bufferedSubway);
